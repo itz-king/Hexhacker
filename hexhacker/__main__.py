@@ -7,5 +7,5 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger("__name__")
 
 print("Bot Starting....")
-hexhacker.start()
-hexhacker.run_until_disconnected()
+hexhackerub.start()
+hexhackerub.run_until_disconnected()
