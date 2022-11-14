@@ -1,4 +1,4 @@
-from Asuna import *
+from hexhacker import *
 from . import *
 from telethon import events, Button , types
 from datetime import datetime as dt
@@ -9,30 +9,7 @@ import os
 from datetime import datetime
 from pytz import timezone
 
-HELP_STR="""✘ Commands Available
-• `.purge`
-    Delete All Message From Replied Message
-    
-• `.id`
-    Get Chat Id
-    
-• `.dc <filename>`
-    Pack Into File
-    
-• `.open`
-    Get Contents of File
- 
-• `.telegraph`
-    Upload Replied File to Telegraph
-    
-• `.when`
-    Shows The Date of Forwarded Message
-
-• `.name`
-    Get The Files Name And Size
-"""
-
-@asunaub.on(events.NewMessage(outgoing=True , pattern=r"^.purge$"))
+@hexhacker.on(events.NewMessage(outgoing=True , pattern=r"^.purge$"))
 async def purge(event):
     reply=await event.get_reply_message()
     from_id=reply.id -1
@@ -40,19 +17,19 @@ async def purge(event):
         await event.edit(f"`Reply...`")
     try:
         p=0
-        async for msg in asunaub.iter_messages(
+        async for msg in hexhacker.iter_messages(
             event.chat_id,
             min_id=from_id,
         ):
             await msg.delete()
             p+=1
-        xx=await asunaub.send_message(event.chat_id,f"`Purged {p} Messages !`")
+        xx=await hexhacker.send_message(event.chat_id,f"`Purged {p} Messages !`")
         time.sleep(5)
         await xx.delete()
     except Exception as e:
         pass
 
-@asunaub.on(events.NewMessage(outgoing=True,pattern=r"^.id$"))
+@hexhacker.on(events.NewMessage(outgoing=True,pattern=r"^.id$"))
 async def id(slime):
     if slime.reply_to_msg_id:
         await slime.get_input_chat()
@@ -61,7 +38,7 @@ async def id(slime):
     else:
         await slime.edit("**Current Chat ID:**  `{}`".format(str(slime.chat_id)))
         
-@asunaub.on(events.NewMessage(outgoing=True,pattern=r"^.dc (.*)"))
+@hexhacker.on(events.NewMessage(outgoing=True,pattern=r"^.dc (.*)"))
 async def pp(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
@@ -77,13 +54,13 @@ async def pp(event):
             b.write(str(a.message))
             b.close()
             await event.edit(f"Packing into {input_str}")
-            await asunaub.send_file(
+            await hexhacker.send_file(
                 event.chat_id, input_str,caption=str(f"""`{input_str}`""")
             )
             await event.delete()
             os.remove(input_str)
             
-@asunaub.on(events.NewMessage(outgoing=True , pattern=r"^.open$"))
+@hexhacker.on(events.NewMessage(outgoing=True , pattern=r"^.open$"))
 async def pp(event):
     if event.reply:
         a = await event.get_reply_message()
@@ -98,7 +75,7 @@ async def pp(event):
             await event.edit(f"`{data}`")
             os.remove(nm)
             
-@asunaub.on(events.NewMessage(outgoing=True , pattern=r"^.telegraph$"))
+@hexhacker.on(events.NewMessage(outgoing=True , pattern=r"^.telegraph$"))
 async def telegraph(event):
     reply=await event.get_reply_message()
     await event.edit("`Pasting to telegraph...`")
@@ -108,7 +85,7 @@ async def telegraph(event):
     await event.edit(f"`Uploaded To Telegraph` : `{limk}`")
     os.remove(dl.file.name)
 
-@asunaub.on(events.NewMessage(outgoing=True , pattern=r"^.when$"))
+@hexhacker.on(events.NewMessage(outgoing=True , pattern=r"^.when$"))
 async def when(event):
     reply = await event.get_reply_message()
     if reply:
@@ -132,7 +109,7 @@ async def when(event):
     result=op.strftime(format)
     await event.edit(str(f"""`This message was posted on : {result} which is {hrs} hours {min} minutes {second} seconds ago   `"""))
     
-@asunaub.on(events.NewMessage(outgoing=True,pattern=r'^.name$'))
+@hexhacker.on(events.NewMessage(outgoing=True,pattern=r'^.name$'))
 async def name(event):
     if not event.reply:
         await event.edit(f'''`Please Reply To A Telegram File`''')
