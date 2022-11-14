@@ -6,4 +6,4 @@ from hexhacker.env import *
 def mention(name, userid):
   return f"[{name}](tg://user?id={userid})"
 
-hexhacker = TelegramClient(StringSession(SESSION), API_ID, API_HASH)
+hexhackerub = TelegramClient(StringSession(SESSION), API_ID, API_HASH)
