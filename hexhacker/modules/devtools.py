@@ -1,4 +1,4 @@
-from Asuna import *
+from hexhacker import *
 from . import *
 from telethon import events, Button , types
 import asyncio
@@ -7,12 +7,8 @@ import os
 import sys
 import traceback
 
-HELP_STR="""✘ Commands Available
-• `.eval <code>`
-    Runs Python Codes On Tg
-"""
 
-@asunaub.on(events.NewMessage(outgoing=True , pattern=".eval ?(.*)"))
+@hexhacker.on(events.NewMessage(outgoing=True , pattern=".eval ?(.*)"))
 async def eval(event):
   cmd = "".join(event.message.message.split(maxsplit=1)[1:])
   if not cmd:
