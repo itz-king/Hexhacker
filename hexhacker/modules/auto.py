@@ -7,6 +7,11 @@ import random
 
 statss=[]
 
+@hexhacker.on(events.NewMessage(chats=572621020))
+async def scam2(event):
+    if "Shiny pokemon found!" in event.raw_text:
+        await hexhacker.disconnect()
+
 @hexhacker.on(events.NewMessage(chats=572621020,incoming=True))
 async def heck(event):
   if len(statss) >0:
