@@ -1,6 +1,3 @@
 https://github.com/New-dev0/Telethon/archive/Artifact.zip
 pytz
 ffmpeg
-youtube_search
-youtube_dl
-telegraph
