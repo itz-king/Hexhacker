@@ -21,7 +21,7 @@ async def heck(event):
     
 @hexhacker.on(events.NewMessage(outgoing=True, pattern=r"^.hexa ?(.*)"))
 async def stats(event):
-  args=event.text[7:]
+  args=event.text[6:]
   if args=="on":
     statss.append("True")
   elif args=="off":
